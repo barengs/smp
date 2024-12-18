@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-abstract class Controller
+use Illuminate\Routing\Controller as RoutingController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+abstract class Controller extends RoutingController
 {
-    //
+    use AuthorizesRequests;
 }
