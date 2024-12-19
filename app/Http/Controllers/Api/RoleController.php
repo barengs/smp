@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Attendant;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ApiResource;
+use Illuminate\Http\Request;
 
-class AttendantController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Attendant::with('user')->latest()->paginate();
-
-        return new ApiResource(true, 'List data karyawan', $data);
+        //
     }
 
     /**
@@ -30,17 +26,15 @@ class AttendantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $data = Attendant::where('id', $id)->with('user')->first();
-
-        return new ApiResource(true, 'List data karyawan', $data);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Attendant $attendant)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -48,7 +42,7 @@ class AttendantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attendant $attendant)
+    public function destroy(string $id)
     {
         //
     }
