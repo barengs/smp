@@ -57,7 +57,7 @@
 <body>
 
     <!-- ========== Switcher  ========== -->
-    <div id="hs-overlay-switcher" class="hs-overlay hidden ti-offcanvas ti-offcanvas-right" tabindex="-1">
+    {{-- <div id="hs-overlay-switcher" class="hs-overlay hidden ti-offcanvas ti-offcanvas-right" tabindex="-1">
       <div class="ti-offcanvas-header z-10 relative">
         <h5 class="ti-offcanvas-title">
           Switcher
@@ -463,7 +463,7 @@
       <div class="ti-offcanvas-footer sm:flex justify-between">
         <a href="javascript:void(0);" id="reset-all" class="ti-btn ti-btn-danger w-full m-1">Reset</a>
       </div>
-    </div>
+    </div> --}}
     <!-- ========== END Switcher  ========== -->
     <!-- Loader -->
     <div id="loader" >

@@ -1,18 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Dashboard from './pages/Dashboard/Dashboard';
+// import styles from '../../css/style.css';
+// import "@css/styles.css";
+// import "@js/main.js";
+// import "@remixicons";
+// import "@bootstrap-icons";
+
+import Header from './layouts/Header';
+import Sidebar from './layouts/Sidebar';
+import Footer from './layouts/Footer';
 
 function Home() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Home2 Component</div>
+        <div className="page">
 
-                        <div className="card-body">I'm an Home component!</div>
-                    </div>
-                </div>
-            </div>
+            <Header />
+            <Sidebar />
+            <Dashboard />
+            <Footer />
         </div>
     );
 }
@@ -24,7 +30,7 @@ if (document.getElementById('app')) {
 
     Index.render(
         <React.StrictMode>
-            <Home/>
+            <Home />
         </React.StrictMode>
     )
 }
