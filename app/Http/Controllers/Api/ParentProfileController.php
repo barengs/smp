@@ -8,7 +8,11 @@ use App\Models\ParentProfile;
 use App\Models\Phone;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager;
 
 class ParentProfileController extends Controller
 {
@@ -56,7 +60,11 @@ class ParentProfileController extends Controller
 
         if ($request->hasFile('photo'))
         {
-            // no uploaded
+            $imageManager = new ImageManager(new Driver());
+            $photo = $imageManager->read($request->photo);
+            $photo->scale(width: 300);
+            $photo->encode(new WebpEncoder(quality: 65));
+            Storage::disk('public')->put('photo', $photo);
         }
 
         $parent = ParentProfile::create([
