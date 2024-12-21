@@ -6,6 +6,8 @@ use App\Models\Attendant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AttendantController extends Controller
 {
@@ -24,7 +26,40 @@ class AttendantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'email' => 'required|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'first_name' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'phone' => 'required|unique:attendants,phone',
+        ]);
+
+        if ($validation->fails()) {
+			return response()->json($validation->errors(), 422);
+		}
+
+        $account = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        if ($account) {
+            $att = Attendant::create([
+                'user_id' => $account->id,
+                'code' => 123,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ]);
+
+            if ($att) {
+                return new ApiResource(true, 'Data karyawan tersimpan', $att);
+            }
+        }
     }
 
     /**
@@ -32,7 +67,7 @@ class AttendantController extends Controller
      */
     public function show($id)
     {
-        $data = Attendant::where('id', $id)->with('user')->first();
+        $data = Attendant::where('id', $id)->orWhere('first_name', $id)->with('user')->first();
 
         return new ApiResource(true, 'List data karyawan', $data);
     }

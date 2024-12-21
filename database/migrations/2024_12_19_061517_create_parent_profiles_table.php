@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('parent_profiles', function (Blueprint $table) {
             $table->id('kk');
-            $table->foreignId('main_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('main_id')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('parent_as', ['ayah', 'ibu'])->default('ayah');
             $table->string('nik')->unique();
@@ -24,7 +24,10 @@ return new class extends Migration
             $table->string('domicile_address')->nullable();
             $table->foreignId('village_id')->constrained()->cascadeOnDelete();
             $table->foreignId('phone_id')->constrained()->cascadeOnDelete();
+            $table->text('photo')->nullable();
             $table->timestamps();
+
+            $table->foreign('main_id')->references('kk')->on('parent_profiles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
