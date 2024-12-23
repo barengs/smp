@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AttendantController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EducationTypeController;
 use App\Http\Controllers\Api\FormalEducationController;
 use App\Http\Controllers\Api\NonFormalEducationController;
 use App\Http\Controllers\Api\ParentProfileController;
@@ -25,4 +26,5 @@ Route::apiResource('karyawan', AttendantController::class);
 Route::apiResource('orang-tua', ParentProfileController::class);
 Route::apiResource('student-registration', StudentRegistrationController::class);
 Route::apiResource('formal-education', FormalEducationController::class);
+Route::apiResource('education-type', EducationTypeController::class);
 Route::apiResource('nonformal-education', NonFormalEducationController::class);

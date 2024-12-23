@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class StudentRegistrationPost extends FormRequest
+class EducationTypePost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,8 @@ class StudentRegistrationPost extends FormRequest
     public function rules(): array
     {
         return [
-            'nik' => 'required|min:16|string|unique:student_registrations,nik',
-            'first_name' => 'required|string',
-            'last_name' => 'string',
-            'gender' => '',
-            'last_formal_edu_id' => '',
-            'last_nonformal_edu_id' => '',
-            'photo' => 'file|mimes:png,jpg,jpeg',
-            'address' => 'string',
-            'village_id' => 'required',
+            'code' => 'required',
+            'name' => 'required',
         ];
     }
 
