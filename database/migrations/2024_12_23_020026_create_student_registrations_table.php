@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('reg_no')->nullable();
             $table->string('nik');
             $table->string('first_name');
-            $table->string('latst_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->enum('gender', ['L', 'P'])->default('L');
             $table->integer('last_formal_edu_id')->nullable();
             $table->integer('last_nonformal_edu_id')->nullable();
