@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->enum('gender', ['l', 'p'])->default('l');
             $table->string('address')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->timestamps();
         });
     }
