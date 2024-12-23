@@ -10,6 +10,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Route::resource(AuthController::class);
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('login', 'login');
+        Route::post('logout', 'logout');
+        Route::post('refresh', 'refresh');
+        Route::get('me', 'me');
+    });
+});
+
 Route::apiResource('karyawan', AttendantController::class);
 Route::apiResource('orang-tua', ParentProfileController::class);
 Route::apiResource('student-registration', StudentRegistrationController::class);
