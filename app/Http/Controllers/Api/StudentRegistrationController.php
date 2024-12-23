@@ -35,9 +35,9 @@ class StudentRegistrationController extends Controller
             $imageManager = new ImageManager(new Driver());
             $photo = $imageManager->read($request->photo);
             $photo->scale(width: 300);
-            $photo->encode(new WebpEncoder(quality: 65));
+            $encodedPhoto = $photo->encode(new WebpEncoder(quality: 65));
             $photoFilename = 'photos/' . uniqid() . '.webp';
-            Storage::disk('public')->put('photo', $photo);
+            Storage::disk('public')->put($photoFilename, $encodedPhoto);
         }
 
         $student = StudentRegistration::create([
@@ -49,6 +49,7 @@ class StudentRegistrationController extends Controller
             'last_formal_edu_id' => $data['last_formal_edu_id'] ?? null,
             'last_nonformal_edu_id' => $data['last_nonformal_edu_id'] ?? null,
             'photo' => $photoFilename ?? null,
+            // TODO: NYALAKAN INI NANTI
             // 'parent_id' => auth()->user->id,
             'parent_id' => 1,
             'address' => $data['address'],
