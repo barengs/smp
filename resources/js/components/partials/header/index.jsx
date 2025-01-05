@@ -16,7 +16,6 @@ import Language from "./Tools/Language";
 import useRtl from "@/hooks/useRtl";
 import useMobileMenu from "@/hooks/useMobileMenu";
 import MonoChrome from "./Tools/MonoChrome";
-import HeaderCart from "./Tools/cart";
 
 const Header = ({ className = "custom-class" }) => {
   const [collapsed, setMenuCollapsed] = useSidebar();
@@ -121,7 +120,6 @@ const Header = ({ className = "custom-class" }) => {
             <Language />
             <SwitchDark />
             <MonoChrome />
-            <HeaderCart />
             {width >= breakpoints.md && <Message />}
             {width >= breakpoints.md && <Notification />}
             {width >= breakpoints.md && <Profile />}

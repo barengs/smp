@@ -12,7 +12,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/images/brand-logos/favicon.ico')}}" type="image/x-icon">
     @viteReactRefresh
-    @vite(['resources/js/main.jsx', 'reources/js/assets/scss/app.css'])
+    @vite(['resources/js/main.jsx'])
 </head>
 <body>
 

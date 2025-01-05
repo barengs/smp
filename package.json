@@ -45,6 +45,7 @@
         "leaflet": "^1.9.4",
         "localforage": "^1.10.0",
         "match-sorter": "^8.0.0",
+        "path": "^0.12.7",
         "quill": "^2.0.3",
         "react": "^19.0.0",
         "react-apexcharts": "^1.7.0",
@@ -70,7 +71,7 @@
         "simplebar-react": "^3.3.0",
         "sort-by": "^0.0.2",
         "sweetalert2": "^11.6.13",
-        "swiper": "^11.1.15",
+        "swiper": "^11.2.0",
         "uuidv4": "^6.2.13",
         "yarn": "^1.22.22",
         "yup": "^1.6.1"

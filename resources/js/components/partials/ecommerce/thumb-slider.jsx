@@ -17,7 +17,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Navigation, Thumbs } from "swiper/react";
 import useRtl from "@/hooks/useRtl";
 
 const ThumbSliderCom = ({ product }) => {
