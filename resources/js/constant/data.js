@@ -5,18 +5,26 @@ export const menuItems = [
   },
 
   {
-    title: "Dashboard",
+    title: "Beranda",
     icon: "heroicons-outline:home",
-    link: "dashboard",
+    link: "/dashboard",
   },
   {
-    title: "Multi Level",
-    icon: "heroicons:share",
+    title: "Santri",
+    icon: "heroicons:users",
     link: "#",
     child: [
       {
-        childtitle: "Level 1.1",
-        childlink: "icons",
+        childtitle: "Pendaftaran Santri",
+        childlink: "/santri-baru",
+      },
+      {
+        childtitle: "Data Santri",
+        childlink: "/santri",
+      },
+      {
+        childtitle: "Data Wali",
+        childlink: "/wali-santri",
       },
       {
         childtitle: "Level 1.2",
@@ -32,6 +40,44 @@ export const menuItems = [
           },
         ],
       },
+    ],
+  },
+  {
+    title: "Transaksi",
+    icon: "heroicons:credit-card",
+    link: "#",
+    child: [
+      {
+        childtitle: "Pembayaran",
+        childlink: "/pembayaran",
+      },
+      {
+        childtitle: "Penarikan",
+        childlink: "/penarikan",
+      },
+      {
+        childtitle: "Laporan",
+        childlink: "/laporan",
+      }
+    ],
+  },
+  {
+    title: "Karyawan",
+    icon: "heroicons:user",
+    link: "#",
+    child: [
+      {
+        childtitle: "Karyawan",
+        childlink: "/karyawan",
+      },
+      {
+        childtitle: "Ijin",
+        childlink: "/role",
+      },
+      {
+        childtitle: "Hak Akses",
+        childlink: "/permission",
+      }
     ],
   },
 ];
