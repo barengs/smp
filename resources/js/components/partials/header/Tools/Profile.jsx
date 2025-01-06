@@ -21,7 +21,7 @@ const profileLabel = () => {
       </div>
       <div className="flex-none text-slate-600 dark:text-white text-sm font-normal items-center lg:flex hidden overflow-hidden text-ellipsis whitespace-nowrap">
         <span className="overflow-hidden text-ellipsis whitespace-nowrap w-[85px] block">
-          Albert Flores
+          Ust. Rozi
         </span>
         <span className="text-base inline-block ltr:ml-[10px] rtl:mr-[10px]">
           <Icon icon="heroicons-outline:chevron-down"></Icon>
@@ -57,39 +57,12 @@ const Profile = () => {
         console.log("chat");
       },
     },
-    {
-      label: "Email",
-      icon: "heroicons-outline:mail",
-      action: () => {
-        console.log("email");
-      },
-    },
-    {
-      label: "Todo",
-      icon: "heroicons-outline:clipboard-check",
-      action: () => {
-        console.log("todo");
-      },
-    },
+    
     {
       label: "Settings",
       icon: "heroicons-outline:cog",
       action: () => {
         console.log("settings");
-      },
-    },
-    {
-      label: "Price",
-      icon: "heroicons-outline:credit-card",
-      action: () => {
-        console.log("price");
-      },
-    },
-    {
-      label: "Faq",
-      icon: "heroicons-outline:information-circle",
-      action: () => {
-        console.log("faq");
       },
     },
     {

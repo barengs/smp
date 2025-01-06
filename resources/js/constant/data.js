@@ -11,7 +11,7 @@ export const menuItems = [
   },
   {
     title: "Santri",
-    icon: "heroicons:users",
+    icon: "heroicons:academic-cap",
     link: "#",
     child: [
       {
@@ -25,21 +25,7 @@ export const menuItems = [
       {
         childtitle: "Data Wali",
         childlink: "/wali-santri",
-      },
-      {
-        childtitle: "Level 1.2",
-        childlink: "Level-1",
-        multi_menu: [
-          {
-            multiTitle: "Level 2.1",
-            multiLink: "Level-2",
-          },
-          {
-            multiTitle: "Level 2.2",
-            multiLink: "Level-2.3",
-          },
-        ],
-      },
+      }
     ],
   },
   {
@@ -63,7 +49,7 @@ export const menuItems = [
   },
   {
     title: "Karyawan",
-    icon: "heroicons:user",
+    icon: "heroicons:users",
     link: "#",
     child: [
       {
