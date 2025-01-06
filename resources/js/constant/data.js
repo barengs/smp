@@ -66,6 +66,29 @@ export const menuItems = [
       }
     ],
   },
+  {
+    title: "Pengaturan",
+    icon: "heroicons:cog-6-tooth",
+    link: "#",
+    child: [
+      {
+        childtitle: "Provinsi",
+        childlink: "/provinsi",
+      },
+      {
+        childtitle: "Kota/Kabupaten",
+        childlink: "/kota",
+      },
+      {
+        childtitle: "Kecamatan",
+        childlink: "/kecamatan",
+      },
+      {
+        childtitle: "Desa",
+        childlink: "/desa",
+      }
+    ],
+  },
 ];
 
 export const topMenu = [
