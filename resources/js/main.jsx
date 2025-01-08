@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./server";
 ReactDOM.createRoot(document.getElementById("app")).render(
   <>
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <Provider store={store}>
         <App />
       </Provider>

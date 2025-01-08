@@ -3,7 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 import reactRefresh from "@vitejs/plugin-react-refresh";
 import path from "path";
-import rollupReplace from "@rollup/plugin-replace";
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
     resolve: {
@@ -21,5 +21,6 @@ export default defineConfig({
         }),
         react(),
         reactRefresh(),
+        // eslint(),
     ],
 });
