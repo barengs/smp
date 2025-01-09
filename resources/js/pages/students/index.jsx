@@ -4,6 +4,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
@@ -15,6 +16,9 @@ import GlobalFilter from './GlobalFilter';
 import Icon from "@/components/ui/Icon";
 import Dropdown from "@/components/ui/Dropdown";
 import { Menu } from "@headlessui/react";
+
+import { studentData } from '../../constant/student-data';
+
 // akan menerapkan info peringkat ke baris (menggunakan utilitas sortir kecocokan)
 const fuzzyFilter = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
@@ -23,44 +27,6 @@ const fuzzyFilter = (row, columnId, value, addMeta) => {
 
   return itemRank.passed
 }
-
-const studentData = [
-  {
-    firstName: 'Ali',
-    lastName: 'Ahmad',
-    nik: '112233445566',
-    address: 'palengaan',
-    gender: 'Laki-Laki'
-  },
-  {
-    firstName: 'Ahmad',
-    lastName: 'Barick',
-    nik: '112233445566',
-    address: 'palengaan',
-    gender: 'Laki-Laki'
-  },
-  {
-    firstName: 'Bila',
-    lastName: 'Jannah',
-    nik: '112233445566',
-    address: 'palengaan',
-    gender: 'Perempuan'
-  },
-  {
-    firstName: 'Ahmad',
-    lastName: 'Barick',
-    nik: '112233445566',
-    address: 'palengaan',
-    gender: 'Laki-Laki'
-  },
-  {
-    firstName: 'Bila',
-    lastName: 'Jannah',
-    nik: '112233445566',
-    address: 'palengaan',
-    gender: 'Perempuan'
-  }
-];
 
 const columnHelper = createColumnHelper();
 
@@ -148,32 +114,31 @@ const Student = () => {
   // const rerender = useReducer(() => ({}), {})[1];
   const [globalFilter, setGlobalFilter] = useState('');
 
+  const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
+
   const [sorting, setSorting] = useState([]);
 
   const table = useReactTable({
     data,
     columns,
-    filterFns: {
-      fuzzy: fuzzyFilter
-    },
     state: {
+      sorting,
       globalFilter,
-      sorting
+      pagination
     },
-    initialState: {
-      pagination: {
-        pageSize: 5,
-      }
-    },
+    // initialState: {
+    //   pagination
+    // },
     getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    getFilteredRowModel: getFilteredRowModel(),
+
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    globalFilterFn: 'fuzzy',
-    debugTable: true,
-    debugColumns: true,
-    debugHeaders: true,
+
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
   });
 
   const isOdd = (num) => {
@@ -206,10 +171,10 @@ const Student = () => {
                                       onClick: header.column.getToggleSortingHandler()
                                     }}
                                   >
-                                  {header.isPlaceholder ? null : flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                  )}
+                                    {flexRender(
+                                      header.column.columnDef.header,
+                                      header.getContext()
+                                    )}
                                     <Icon icon="heroicons:arrows-up-down" className="text-white text-center ml-2" />
                                   </div>
                                 </th>
@@ -233,6 +198,67 @@ const Student = () => {
                       </table>
                     </div>
                 </div>
+            </div>
+            <div className='flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-700'>
+              <div className='flex items-center mb-4 sm:mb-0'>
+                <span className='mr-2'>Data Per Halaman</span>
+                <select id='' name='page'
+                  className='border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2'
+                  value={table.getState().pagination.pageSize}
+                  onChange={(e) => {table.setPageSize(Number(e.target.value))}}
+                >
+                  {[5, 10, 15, 20, 30, 50, 100].map((pageSize) => (
+                    <option value={pageSize} key={pageSize}>
+                      {pageSize}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className='flex items-center space-x-2'>
+                  <button className='p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-600'
+                    onClick={() => table.setPageIndex(0)}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <Icon icon='heroicons:chevron-double-left' />
+                  </button>
+
+                  <button className='p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-600'
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <Icon icon='heroicons:chevron-left' />
+                  </button>
+
+                  <span className='flex items-center'>
+                    <input id='' name='curentpage'
+                      type="number" min={1} max={table.getPageCount()}
+                      value={table.getState().pagination.pageIndex + 1}
+                      onChange={(e) => {
+                        const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                        table.setPageIndex(page);
+                      }}
+                      className='w-16 p-2 rounded-md border border-gray-300 text-center'
+                    />
+                    <span className='ml-1'>of {table.getPageCount()}</span>
+                  </span>
+
+                  <button
+                    className='p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50'
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <Icon icon="heroicons:chevron-right" />
+                  </button>
+
+                  <button
+                    className='p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:opacity-50'
+                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <Icon icon="heroicons:chevron-double-right" />
+                  </button>
+              </div>
             </div>
         </Card>
     </div>
