@@ -16,7 +16,7 @@ function App() {
     <main className="App  relative">
       <Routes>
         <Route path="/*" element={<Layout />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route exact path="dashboard" element={<Dashboard />} />
           <Route path="wali-santri" element={<Parent />} />
           <Route path="santri" element={<Student />} />
         </Route>

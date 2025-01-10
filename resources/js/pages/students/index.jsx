@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import {rankItem} from "@tanstack/match-sorter-utils"
+// import {rankItem} from "@tanstack/match-sorter-utils"
 
 import Card from "@/components/ui/Card";
 import GlobalFilter from './GlobalFilter';
@@ -20,13 +20,13 @@ import { Menu } from "@headlessui/react";
 import { studentData } from '../../constant/student-data';
 
 // akan menerapkan info peringkat ke baris (menggunakan utilitas sortir kecocokan)
-const fuzzyFilter = (row, columnId, value, addMeta) => {
-  const itemRank = rankItem(row.getValue(columnId), value);
+// const fuzzyFilter = (row, columnId, value, addMeta) => {
+//   const itemRank = rankItem(row.getValue(columnId), value);
 
-  addMeta({itemRank});
+//   addMeta({itemRank});
 
-  return itemRank.passed
-}
+//   return itemRank.passed
+// }
 
 const columnHelper = createColumnHelper();
 
@@ -80,7 +80,7 @@ const columns = [
               </span>
             } 
           >
-            <div className="divide-x divide-slate-100 dark:divide-slate-800">
+            <div className="divide-y divide-slate-100 dark:divide-slate-800">
               {actions.map((item, i) => (
                 <Menu.Item key={i}>
                   <div
@@ -112,7 +112,7 @@ const columns = [
 const Student = () => {
   const [data] = useState(() => [...studentData]);
   // const rerender = useReducer(() => ({}), {})[1];
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [globalFilter, setGlobalFilter] = useState([]);
 
   const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
 
@@ -126,9 +126,6 @@ const Student = () => {
       globalFilter,
       pagination
     },
-    // initialState: {
-    //   pagination
-    // },
     getCoreRowModel: getCoreRowModel(),
 
     onSortingChange: setSorting,
@@ -154,6 +151,7 @@ const Student = () => {
                   <GlobalFilter filter={globalFilter ?? ''} setFilter={value => setGlobalFilter(String(value))} />
                 </div>
             </div>
+            
             <div className="overflow-x-auto -mx-6">
                 <div className="inline-block min-w-full align-middle">
                     <div className="overflow-hidden ">
@@ -199,6 +197,7 @@ const Student = () => {
                     </div>
                 </div>
             </div>
+
             <div className='flex flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-700'>
               <div className='flex items-center mb-4 sm:mb-0'>
                 <span className='mr-2'>Data Per Halaman</span>
