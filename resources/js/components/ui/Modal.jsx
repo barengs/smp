@@ -18,6 +18,7 @@ const Modal = ({
   label = "Basic Modal",
   labelClass,
   ref,
+  icon
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -39,8 +40,9 @@ const Modal = ({
           <button
             type="button"
             onClick={openModal}
-            className={`btn ${labelClass}`}
+            className={`btn ${labelClass} inline-flex text-center items-center px-3 py-1 me-2 mb-2`}
           >
+            <Icon icon={icon} width="20" className="mr-2" />
             {label}
           </button>
           <Transition appear show={showModal} as={Fragment}>

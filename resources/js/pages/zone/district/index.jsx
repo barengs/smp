@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import {
   createColumnHelper,
   flexRender,
@@ -9,91 +9,48 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-// import {rankItem} from "@tanstack/match-sorter-utils"
-
 import Card from "@/components/ui/Card";
-import GlobalFilter from './GlobalFilter';
 import Icon from "@/components/ui/Icon";
-import Modal from "@/components/ui/Modal";
-import Tooltip from "@/components/ui/Tooltip";
-
-import { studentData } from '../../constant/student-data';
-import AddNewStudent from './AddNew';
-import Button from "@/components/ui/Button";
-
-// akan menerapkan info peringkat ke baris (menggunakan utilitas sortir kecocokan)
-// const fuzzyFilter = (row, columnId, value, addMeta) => {
-//   const itemRank = rankItem(row.getValue(columnId), value);
-
-//   addMeta({itemRank});
-
-//   return itemRank.passed
-// }
+// import Tooltip from "@/components/ui/Tooltip";
+// import Button from "@/components/ui/Button";
+import GlobalFilter from '@/components/partials/filter/GlobalFilter';
 
 const columnHelper = createColumnHelper();
 
 const columns = [
-  columnHelper.accessor(row => row.firstName, {
-    header: 'First Name',
-    id: 'firstName',
-    cell: info => info.getValue(),
+  columnHelper.accessor('name', {
+    header: "Nama Kecamatan",
+    id: 'name',
+    cell: item => item.getValue(),
   }),
-  columnHelper.accessor(row => row.lastName, {
-    id: 'lastName',
-    cell: info => info.getValue(),
+  columnHelper.accessor('code', {
+    header: "Kode",
+    id: 'code',
+    cell: item => item.getValue(),
   }),
-  columnHelper.accessor(row => row.nik, {
-    id: 'nik',
-    cell: info => info.getValue(),
+  columnHelper.accessor('meta', {
+    header: "Latitude",
+    id: 'meta',
+    cell: item => item.getValue(),
   }),
-  columnHelper.accessor(row => row.address, {
-    id: 'address',
-    cell: info => info.getValue(),
+  columnHelper.accessor('city', {
+    header: "Kota/Kabupaten",
+    id: 'city',
+    cell: item => item.getValue(),
   }),
-  columnHelper.accessor(row => row.gender, {
-    id: 'gender',
-    cell: info => info.getValue(),
-  }),
-  columnHelper.accessor('action', {
-    header: 'Action',
-    cell: () => {
-      return (
-        <div className="flex space-x-3 rtl:space-x-reverse">
-          <Tooltip content="View" placement="top" arrow animation="shift-away">
-            <button className="action-btn" type="button">
-              <Icon icon="heroicons:eye" />
-            </button>
-          </Tooltip>
-          <Tooltip content="Edit" placement="top" arrow animation="shift-away">
-            <button className="action-btn" type="button">
-              <Icon icon="heroicons:pencil-square" />
-            </button>
-          </Tooltip>
-          <Tooltip
-            content="Delete"
-            placement="top"
-            arrow
-            animation="shift-away"
-            theme="danger"
-          >
-            <button className="action-btn" type="button">
-              <Icon icon="heroicons:trash" />
-            </button>
-          </Tooltip>
-        </div>
-      )
-    }
+  columnHelper.accessor('city_code', {
+    header: "Kode Kota",
+    id: 'city_code',
+    cell: item => item.getValue(),
   })
 ];
 
-const Student = () => {
-  const [data] = useState(() => [...studentData]);
-  // const rerender = useReducer(() => ({}), {})[1];
+const District = () => {
+  const [data] = useState([]);
+
   const [globalFilter, setGlobalFilter] = useState([]);
-
-  const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
-
   const [sorting, setSorting] = useState([]);
+  const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
 
   const table = useReactTable({
     data,
@@ -111,40 +68,24 @@ const Student = () => {
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
 
-    getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    getPaginationRowModel: getPaginationRowModel(),
   });
-
-  const isOdd = (num) => {
-    return num % 2 ? 'bg-gray-100' : '';
+  // sebagai style model table
+  const isOdd = (index) => {
+    return index % 2 ? 'bg-gray-100' : '';
   }
 
   return (
     <div className='space-y-5'>
-        <Card noborder>
-            <div className="md:flex justify-between items-center mb-2">
-                <h4 className="card-title">Data Santri</h4>
+      <Card noborder>
+        <div className="md:flex justify-between items-center mb-2">
+                <h4 className="card-title">Data Kecamatan</h4>
                 <div className='flex'>
                   <GlobalFilter filter={globalFilter ?? ''} setFilter={value => setGlobalFilter(String(value))} />
                   <button type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-md text-sm px-3 py-2 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2 ml-2">
                     <Icon icon='heroicons:inbox-arrow-down' width="20" className="mr-2" /> Export Dokumen
                   </button>
-                  <Modal
-                    label="Santri Baru"
-                    title="Santri Baru"
-                    labelClass="btn-outline-dark"
-                    uncontrol
-                    className="max-w-fit"
-                    icon="heroicons:document-plus"
-                    footerContent={
-                      <Button
-                        text="Simpan"
-                        className="btn-dark px-3 py-2"
-                      />
-                    }
-                  >
-                    <AddNewStudent />
-                  </Modal>
                 </div>
             </div>
 
@@ -255,9 +196,9 @@ const Student = () => {
                   </button>
               </div>
             </div>
-        </Card>
+      </Card>
     </div>
   )
 }
 
-export default Student;
+export default District;
