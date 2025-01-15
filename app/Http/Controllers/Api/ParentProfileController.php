@@ -58,8 +58,7 @@ class ParentProfileController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        if ($request->hasFile('photo'))
-        {
+        if ($request->hasFile('photo')) {
             $imageManager = new ImageManager(new Driver());
             $photo = $imageManager->read($request->photo);
             $photo->scale(width: 300);
@@ -72,8 +71,8 @@ class ParentProfileController extends Controller
             'main_id' => $request->main_id,
             'user_id' => $user->id,
             'parent_as' => $request->parent_as,
-            'nik' => $request->first_name,
-            'nik' => $request->first_name,
+            'nik' => $request->nik,
+            'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'gender' => $request->gender,
             'card_address' => $request->card_address,
