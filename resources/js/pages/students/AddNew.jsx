@@ -3,7 +3,7 @@ import Icons from '../../components/ui/Icon';
 import { Card } from 'flowbite-react';
 import Textinput from "@/components/ui/Textinput";
 
-const AddNewStudent = (id) => {
+const AddNewStudent = () => {
   return (
     <div>
         <h4 className="font-medium text-lg mb-3 text-slate-900">
@@ -16,6 +16,11 @@ const AddNewStudent = (id) => {
             </div>
             <div>
                 <Textinput label="No Kartu Keluarga" type="text" placeholder="Masukan Nomor Kartu Keluarga" />
+                <Textinput label="No Kartu Tanda Penduduk" type="text" placeholder="Masukan Nomor Kartu Tanda Penduduk" />
+            </div>
+            <div>
+                <Textinput label="No Kartu Keluarga" type="text" placeholder="Masukan Nomor Kartu Keluarga" />
+                <Textinput label="No Kartu Tanda Penduduk" type="text" placeholder="Masukan Nomor Kartu Tanda Penduduk" />
             </div>
           </div>
         </div>

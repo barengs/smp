@@ -32,6 +32,7 @@ import Button from "@/components/ui/Button";
 
 const columnHelper = createColumnHelper();
 
+
 const columns = [
   columnHelper.accessor(row => row.firstName, {
     header: 'First Name',
@@ -134,7 +135,7 @@ const Student = () => {
                     title="Santri Baru"
                     labelClass="btn-outline-dark"
                     uncontrol
-                    className="max-w-fit"
+                    className="max-w-5xl"
                     icon="heroicons:document-plus"
                     footerContent={
                       <Button
