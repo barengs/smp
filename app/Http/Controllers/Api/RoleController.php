@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApiResource;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -12,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $data = Role::all();
+        return new ApiResource(true, 'data role', $data);
     }
 
     /**

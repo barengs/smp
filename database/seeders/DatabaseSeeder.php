@@ -18,11 +18,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            UserSeeder::class,
             ProvincesSeeder::class,
             CitiesSeeder::class,
             DistrictsSeeder::class,
             VillagesSeeder::class,
             FormalEducationSeeder::class,
+            PermissionSeeder::class,
+            HostelSeeder::class,
+            FormalEducationSeeder::class,
+            NonFormalEducationSeeder::class,
+            EducationTypeSeeder::class,
+            AttendantSeeder::class,
         ]);
     }
 }

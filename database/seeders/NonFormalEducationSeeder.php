@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\NonFormalEducation;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class NonFormalEducationSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class NonFormalEducationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $formalEdu = [
+            ['name' => 'Ula'],
+            ['name' => 'Wustho'],
+            ['name' => 'Ulya'],
+        ];
+
+        NonFormalEducation::insert($formalEdu);
     }
 }

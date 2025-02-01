@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Resources\ApiResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -12,7 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Permission::all();
+        return new ApiResource(true, 'data permission', $data);
     }
 
     /**

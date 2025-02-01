@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\EducationType;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EducationTypeSeeder extends Seeder
 {
@@ -12,6 +13,14 @@ class EducationTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        EducationType::create([
+            "code" => "T01",
+            "name" => "Umum",
+        ]);
+
+        EducationType::create([
+            "code" => "T02",
+            "name" => "Tahfidz",
+        ]);
     }
 }

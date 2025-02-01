@@ -14,7 +14,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $data = District::latest()->paginate(10);
+        $data = District::with('city')->latest()->get();
         return new ApiResource(true, 'List data kecamatan', $data);
     }
 

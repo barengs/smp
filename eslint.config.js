@@ -9,4 +9,16 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    rules: {
+      semi: [
+        "error",
+        "always"
+      ],
+      indent: [
+        "error",
+        2
+      ]
+    }
+  }
 ];

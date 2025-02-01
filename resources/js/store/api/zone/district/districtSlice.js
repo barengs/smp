@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialDistrictState = {
     data: [],
-}
+};
 
 const districtSlice = createSlice({
     name: "district",
@@ -13,7 +13,7 @@ const districtSlice = createSlice({
             state.data.push({code, city_code, name, meta});
         }
     }
-})
+});
 
 export const {addToDistrict} = districtSlice.actions;
 

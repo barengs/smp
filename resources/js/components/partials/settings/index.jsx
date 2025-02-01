@@ -47,10 +47,10 @@ const Setings = () => {
          bg-white dark:bg-slate-800 h-screen z-[9999]  md:pb-6 pb-[100px] shadow-base2
           dark:shadow-base3 border border-slate-200 dark:border-slate-700 transition-all duration-150
           ${
-            isOpen
-              ? "translate-x-0 opacity-100 visible"
-              : "ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible"
-          }
+    isOpen
+      ? "translate-x-0 opacity-100 visible"
+      : "ltr:translate-x-full rtl:-translate-x-full opacity-0 invisible"
+    }
         `}
       >
         <SimpleBar className="px-6 h-full">

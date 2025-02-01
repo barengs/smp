@@ -14,7 +14,7 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        $data = Province::latest()->paginate(10);
+        $data = Province::latest()->get();
         return new ApiResource(true, 'List data provinsi', $data);
     }
 

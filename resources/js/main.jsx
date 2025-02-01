@@ -9,13 +9,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import "react-toastify/dist/ReactToastify.css";
-import "./server";
-ReactDOM.createRoot(document.getElementById("app")).render(
+// import "./server";
+ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <BrowserRouter forceRefresh={true}>
+      {/* <React.StrictMode> */}
       <Provider store={store}>
         <App />
       </Provider>
+      {/* </React.StrictMode> */}
     </BrowserRouter>
   </>
 );

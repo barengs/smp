@@ -29,7 +29,26 @@ export const menuItems = [
     ],
   },
   {
-    title: "Transaksi",
+    title: 'Asatidz',
+    icon: 'heroicons:user',
+    link: '#',
+    child: [
+      {
+        childtitle: 'Asatidz',
+        childlink: '/asatidz'
+      },
+      {
+        childtitle: 'Tugas',
+        childlink: '/tugas'
+      },
+      {
+        childtitle: 'Hak Akses',
+        childlink: '/hak-akses'
+      }
+    ]
+  },
+  {
+    title: "Baitul Mal",
     icon: "heroicons:credit-card",
     link: "#",
     child: [
@@ -47,33 +66,57 @@ export const menuItems = [
       }
     ],
   },
+  
   {
-    title: "Karyawan",
-    icon: "heroicons:users",
-    link: "#",
+    title: 'Pesantren',
+    icon: 'heroicons:building-library',
+    link: '#',
     child: [
       {
-        childtitle: "Karyawan",
-        childlink: "/karyawan",
+        childtitle: 'Kelompok Pendidikan',
+        childlink: '/kelompok-pendidikan',
       },
       {
-        childtitle: "Ijin",
-        childlink: "/role",
+        childtitle: 'Asrama',
+        childlink: '/asrama',
       },
       {
-        childtitle: "Hak Akses",
-        childlink: "/permission",
-      }
-    ],
+        childtitle: 'Kamar',
+        childlink: 'kamar',
+      },
+    ]
   },
   {
-    title: "Pengaturan",
+    "title": 'Madrasah',
+    "icon": 'heroicons:building-office',
+    "link": '#',
+    child: [
+      {
+        'childtitle': 'Formal',
+        'childlink': '/pendidikan-formal'
+      },
+      {
+        'childtitle': 'Non-Formal',
+        'childlink': '/pendidikan-non-formal'
+      }
+    ]
+  },
+  {
+    title: "Master",
     icon: "heroicons:cog-6-tooth",
     link: "#",
     child: [
       {
-        childtitle: "Provinsi",
-        childlink: "/provinsi",
+        childtitle: "Kelas",
+        childlink: "/kelas",
+      },
+      {
+        childtitle: "Rombel Kelas",
+        childlink: "/level-kelas",
+      },
+      {
+        childtitle: "Propinsi",
+        childlink: "/propinsi",
       },
       {
         childtitle: "Kota/Kabupaten",
@@ -903,6 +946,7 @@ import ssl from "@/assets/images/e-commerce/cart-icon/ssl.png";
 import stripe from "@/assets/images/e-commerce/cart-icon/stripe.png";
 import truck from "@/assets/images/e-commerce/cart-icon/truck.png";
 import vougepay from "@/assets/images/e-commerce/cart-icon/vougepay.png";
+// import { icon } from "leaflet";
 
 export const payments = [
   {

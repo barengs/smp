@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Loading = () => {
   const [isDark] = useDarkMode();
   return (
-    <div>
+    <div className="text-center justify-center content-center">
       <svg
         className={`animate-spin ltr:-ml-1 ltr:mr-3 rtl:-mr-1 rtl:ml-3 h-6 w-6 `}
         xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const Loading = () => {
 
       <span className=" inline-block mt-1 font-medium  text-sm">
         {" "}
-        Loading ...
+        Sedang mengambil data ...
       </span>
     </div>
   );

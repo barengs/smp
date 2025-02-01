@@ -14,8 +14,8 @@ class VillageController extends Controller
      */
     public function index()
     {
-        $data = Village::latest()->paginate(10);
-        return new ApiResource(true, 'List data desa', $data);
+        $data = Village::with('district')->latest()->get();
+        return new ApiResource(true, 'data desa', $data);
     }
 
     /**
@@ -31,7 +31,8 @@ class VillageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Village::where($id)->orWhere('name', 'like', '%' . $id . '%')->first();
+        return new ApiResource(true, 'data desa', $data);
     }
 
     /**

@@ -14,7 +14,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $data = City::latest()->paginate(10);
+        $data = City::latest()->get();
         return new ApiResource(true, 'List data kota', $data);
     }
 
