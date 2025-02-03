@@ -9,25 +9,19 @@ use Illuminate\Database\Seeder;
 
 class AttendantSeeder extends Seeder
 {
+    protected $data = [
+        ["code" => "AS01", "first_name" => "RAHMAN", "last_name" => "FARUQ", "user_id" => 2],
+        ["code" => "AS02", "first_name" => "RUMHUL", "last_name" => "AMIN", "user_id" => 3],
+        ["code" => "AS03", "first_name" => "FATHUR", "last_name" => "ROZI", "user_id" => 4],
+        ["code" => "AS04", "first_name" => "GHUFRON", "last_name" => "DPU", "user_id" => 5],
+    ];
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $user = User::create([
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
-        ]);
-
-        Attendant::create([
-            'user_id' => $user->id,
-            'code' => '0000',
-            'first_name' => 'admin',
-            'last_name' => 'admin',
-            'gender' => 'l',
-            'address' => 'sistem administrator',
-            'phone' => '123456789111',
-        ]);
+        foreach ($this->data as $row) {
+            Attendant::create($row);
+        }
     }
 }

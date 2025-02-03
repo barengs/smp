@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\EducationRequest;
-use App\Http\Resources\ApiResource;
 use App\Models\FormalEducation;
 use Illuminate\Http\Request;
+use App\Http\Resources\ApiResource;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\EducationRequest;
 
 class FormalEducationController extends Controller
 {
@@ -15,7 +15,7 @@ class FormalEducationController extends Controller
      */
     public function index()
     {
-        $data = FormalEducation::get();
+        $data = FormalEducation::all();
         return new ApiResource(true, 'List data Pendidikan Formal', $data);
     }
 

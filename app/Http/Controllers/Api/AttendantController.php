@@ -16,7 +16,7 @@ class AttendantController extends Controller
      */
     public function index()
     {
-        $data = Attendant::with('user')->latest()->paginate();
+        $data = Attendant::with('user')->latest()->get();
 
         return new ApiResource(true, 'List data karyawan', $data);
     }
@@ -36,8 +36,8 @@ class AttendantController extends Controller
         ]);
 
         if ($validation->fails()) {
-			return response()->json($validation->errors(), 422);
-		}
+            return response()->json($validation->errors(), 422);
+        }
 
         $account = User::create([
             'username' => $request->username,

@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParentProfile extends Model
 {
-    protected $fillable = ['kk', 'nik', 'main_id', 'user_id', 'first_name', 'last_name', 'gender', 'card_address', 'domicile_address', 'village_id', 'phone_id'];
+    protected $guarded = ['id'];
+
+    public function childs()
+    {
+        return $this->hasMany(Student::class, 'parent_id');
+    }
 }

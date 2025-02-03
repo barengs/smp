@@ -16,7 +16,7 @@ class EducationTypeController extends Controller
      */
     public function index()
     {
-        $data = EducationType::latest()->paginate();
+        $data = EducationType::latest()->get();
         return new ApiResource(true, 'List data tipe pendidikan', $data);
     }
 
