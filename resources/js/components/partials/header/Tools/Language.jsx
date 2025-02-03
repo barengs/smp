@@ -41,10 +41,10 @@ const Language = () => {
                       className={`
                       w-full border-b border-b-gray-500 border-opacity-10 px-2 py-2 last:border-none last:mb-0 cursor-pointer first:rounded-t last:rounded-b
                         ${
-                          active
-                            ? "bg-slate-100 dark:bg-slate-700 dark:bg-opacity-70 bg-opacity-50 dark:text-white "
-                            : "text-slate-600 dark:text-slate-300"
-                        }
+                    active
+                      ? "bg-slate-100 dark:bg-slate-700 dark:bg-opacity-70 bg-opacity-50 dark:text-white "
+                      : "text-slate-600 dark:text-slate-300"
+                    }
                         `}
                     >
                       <div className="flex items-center space-x-2 rtl:space-x-reverse">

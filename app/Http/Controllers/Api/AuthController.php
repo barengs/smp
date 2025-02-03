@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -26,11 +27,28 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Invalid credentials'], 401);
+            }
+
+            // Get the authenticated user.
+            $user = auth()->user();
+
+            // (optional) Attach the role to the token.
+            $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
+
+            return response()->json(['status' => true, 'message' => 'login berhasil!', 'data' => $user, 'token' => $token]);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        return $this->respondWithToken($token);
+        // if (! $token = JWTAuth::attempt($credentials)) {
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }
+
+        // return $this->respondWithToken($token);
     }
 
     /**

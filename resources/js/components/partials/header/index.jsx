@@ -12,10 +12,10 @@ import SearchModal from "./Tools/SearchModal";
 import Profile from "./Tools/Profile";
 import Notification from "./Tools/Notification";
 import Message from "./Tools/Message";
-import Language from "./Tools/Language";
+// import Language from "./Tools/Language";
 import useRtl from "@/hooks/useRtl";
 import useMobileMenu from "@/hooks/useMobileMenu";
-import MonoChrome from "./Tools/MonoChrome";
+// import MonoChrome from "./Tools/MonoChrome";
 
 const Header = ({ className = "custom-class" }) => {
   const [collapsed, setMenuCollapsed] = useSidebar();
@@ -23,16 +23,16 @@ const Header = ({ className = "custom-class" }) => {
   const [navbarType] = useNavbarType();
   const navbarTypeClass = () => {
     switch (navbarType) {
-      case "floating":
-        return "floating  has-sticky-header";
-      case "sticky":
-        return "sticky top-0 z-[999]";
-      case "static":
-        return "static";
-      case "hidden":
-        return "hidden";
-      default:
-        return "sticky top-0";
+    case "floating":
+      return "floating  has-sticky-header";
+    case "sticky":
+      return "sticky top-0 z-[999]";
+    case "static":
+      return "static";
+    case "hidden":
+      return "hidden";
+    default:
+      return "sticky top-0";
     }
   };
   const [menuType] = useMenulayout();
@@ -60,10 +60,10 @@ const Header = ({ className = "custom-class" }) => {
         className={` app-header md:px-6 px-[15px]  dark:bg-slate-800 shadow-base dark:shadow-base3 bg-white
         ${borderSwicthClass()}
              ${
-               menuType === "horizontal" && width > breakpoints.xl
-                 ? "py-1"
-                 : "md:py-6 py-3"
-             }
+    menuType === "horizontal" && width > breakpoints.xl
+      ? "py-1"
+      : "md:py-6 py-3"
+    }
         `}
       >
         <div className="flex justify-between items-center h-full">

@@ -1,4 +1,4 @@
-import React, { lazy} from "react";
+import React, { lazy, Suspense} from "react";
 import { Routes, Route} from "react-router-dom";
 
 // home pages  & dashboard
@@ -18,14 +18,26 @@ const FormalEducation = lazy(() => import('./pages/education/formal'));
 const NonFormalEducation = lazy(() => import('./pages/education/nonformal'));
 const EducationType = lazy(() => import('./pages/education/type'));
 
+const Login = lazy(() => import("./pages/auth/login"));
+const Register = lazy(() => import("./pages/auth/register"));
+const ForgotPass = lazy(() => import("./pages/auth/forgot-password"));
+const LockScreen = lazy(() => import("./pages/auth/lock-screen"));
+const Error = lazy(() => import("./pages/404"));
+
 import Layout from "./layout/Layout";
-// import AuthLayout from "./layout/AuthLayout";
+import AuthLayout from "./layout/AuthLayout";
 
 const App = () => {
 
   return (
     <main className="App  relative">
       <Routes>
+        <Route path="/" element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPass />} />
+          <Route path="/lock-screen" element={<LockScreen />} />
+        </Route>
         <Route path="/*" element={<Layout />}>
           <Route exact path="dashboard" element={<Dashboard />} />
           <Route path="wali-santri" element={<Parent />} />
@@ -44,6 +56,11 @@ const App = () => {
           <Route path="pendidikan-formal" element={<FormalEducation />} />
           <Route path="pendidikan-non-formal" element={<NonFormalEducation />} />
         </Route>
+        <Route path="/404" element={
+          <Suspense>
+            <Error />
+          </Suspense>
+        } />
       </Routes>
     </main>
   );

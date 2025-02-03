@@ -17,14 +17,15 @@ const login = () => {
     <div className="loginwrapper">
       <div className="lg-inner-column">
         <div className="left-column relative z-[1]">
-          <div className="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
+          <div className="pt-20 items-center ml-4">
             <Link to="/">
               <img src={isDark ? LogoWhite : Logo} alt="" className="mb-10" />
             </Link>
-            <h4>
-              Assalamualaikum
+            <h4 className="">
+            اَلسَّلَامُ عَلَيْكُمْ
+              <br />
               <span className="text-slate-800 dark:text-slate-400 font-bold">
-                Sistem Manajemen Pesantren
+                Sistem Manajemen Pesantren <br /> {`<SMP />`}
               </span>
             </h4>
           </div>
