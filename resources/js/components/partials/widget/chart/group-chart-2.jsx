@@ -2,6 +2,8 @@ import React from "react";
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Chart from "react-apexcharts";
+import {useGetDashboardsQuery} from "@/store/api/dashboard/dashApiSlice";
+
 
 const shapeLine1 = {
   series: [
@@ -208,23 +210,23 @@ const shapeLine3 = {
 const statistics = [
   {
     name: shapeLine1,
-    title: "Totel revenue",
+    title: "Total Santri",
     count: "3,564",
     bg: "bg-[#E5F9FF] dark:bg-slate-900	",
     text: "text-info-500",
-    icon: "heroicons:shopping-cart",
+    icon: "heroicons:users",
   },
   {
     name: shapeLine2,
-    title: "Products sold",
+    title: "Tatal Asatidz",
     count: "564",
     bg: "bg-[#FFEDE6] dark:bg-slate-900	",
     text: "text-warning-500",
-    icon: "heroicons:cube",
+    icon: "heroicons:user",
   },
   {
     name: shapeLine3,
-    title: "Growth",
+    title: "Guru Tugas Tahun ini",
     count: "+5.0%",
     bg: "bg-[#EAE6FF] dark:bg-slate-900	",
     text: "text-[#5743BE]",
@@ -232,11 +234,41 @@ const statistics = [
   },
 ];
 
+
+
 const GroupChart2 = () => {
+  const {data, isLoading, refetch} = useGetDashboardsQuery();
+  console.log(data);
+  const topChart = [
+    {
+      name: shapeLine1,
+      title: "Total Santri",
+      count: !isLoading ? data.santri : '..',
+      bg: "bg-[#E5F9FF] dark:bg-slate-900	",
+      text: "text-info-500",
+      icon: "heroicons:users",
+    },
+    {
+      name: shapeLine2,
+      title: "Tatal Asatidz",
+      count: !isLoading ? data.asatidz : '..',
+      bg: "bg-[#FFEDE6] dark:bg-slate-900	",
+      text: "text-warning-500",
+      icon: "heroicons:user",
+    },
+    {
+      name: shapeLine3,
+      title: "Guru Tugas Tahun ini",
+      count: !isLoading ? data.tugasan : '..',
+      bg: "bg-[#EAE6FF] dark:bg-slate-900	",
+      text: "text-[#5743BE]",
+      icon: "heroicons:arrow-trending-up-solid",
+    },
+  ];
   return (
     <>
       {" "}
-      {statistics.map((item, i) => (
+      {topChart.map((item, i) => (
         <div key={i}>
           <Card bodyClass="pt-4 pb-3 px-4">
             <div className="flex space-x-3 rtl:space-x-reverse">

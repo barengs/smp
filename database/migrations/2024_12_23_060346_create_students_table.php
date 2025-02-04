@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('district')->nullable();
             $table->string('postal_code')->nullable();
             $table->bigInteger('education_type_id');
-            $table->enum('status', ['Aktif', 'Lulus', 'Dikeluarkan'])->default('Aktif')->nullable();
+            $table->enum('status', ['Aktif', 'Tugas', 'Lulus', 'Dikeluarkan'])->default('Aktif')->nullable();
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
