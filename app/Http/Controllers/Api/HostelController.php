@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HostelRequest;
 use App\Http\Resources\ApiResource;
 use App\Models\Hostel;
 use Illuminate\Http\Request;
@@ -21,9 +22,13 @@ class HostelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HostelRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $addNew = Hostel::create($data);
+
+        return new ApiResource(true, 'berhasil menyimpan asrama', $addNew);
     }
 
     /**
@@ -31,7 +36,8 @@ class HostelController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Hostel::where('id', $id)->orWhere('name', $id)->first();
+        return new ApiResource(true, 'detil asrama', $data);
     }
 
     /**
@@ -39,7 +45,13 @@ class HostelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $addNew = Hostel::find($id);
+
+        $addNew->name = $data['name'] ?? $addNew->name;
+        $addNew->parent_id = $data['perent_id'] ?? $addNew->parent_id;
+
+        return new ApiResource(true, 'berhasil ubah asrama', $addNew);
     }
 
     /**
