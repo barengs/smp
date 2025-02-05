@@ -16,38 +16,40 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create([
+        $administrator = Role::create([
             "name" => "administrator",
             "guard_name" => "web",
         ]);
 
-        Role::create([
+        $admin = Role::create([
             "name" => "admin",
             "guard_name" => "web",
         ]);
 
-        Role::create([
+        $keuangan = Role::create([
             "name" => "keuangan",
             "guard_name" => "web",
         ]);
 
         $this->permissions = [
-            ['name' => 'tambah asatidz'],
-            ['name' => 'ubah asatidz'],
-            ['name' => 'hapus asatidz'],
-            ['name' => 'tambah asrama'],
-            ['name' => 'ubah asrama'],
-            ['name' => 'hapus asrama'],
-            ['name' => 'tambah santri'],
-            ['name' => 'ubah santri'],
-            ['name' => 'hapus santri'],
-            ['name' => 'tambah pendidikan'],
-            ['name' => 'ubah pendidikan'],
-            ['name' => 'hapus pendidikan'],
+            ['name' => 'tambah asatidz', 'guard_name' => 'web'],
+            ['name' => 'ubah asatidz', 'guard_name' => 'web'],
+            ['name' => 'hapus asatidz', 'guard_name' => 'web'],
+            ['name' => 'tambah asrama', 'guard_name' => 'web'],
+            ['name' => 'ubah asrama', 'guard_name' => 'web'],
+            ['name' => 'hapus asrama', 'guard_name' => 'web'],
+            ['name' => 'tambah santri', 'guard_name' => 'web'],
+            ['name' => 'ubah santri', 'guard_name' => 'web'],
+            ['name' => 'hapus santri', 'guard_name' => 'web'],
+            ['name' => 'tambah pendidikan', 'guard_name' => 'web'],
+            ['name' => 'ubah pendidikan', 'guard_name' => 'web'],
+            ['name' => 'hapus pendidikan', 'guard_name' => 'web'],
         ];
 
         foreach ($this->permissions as $permission) {
-            Permission::create($permission);
+            $izin = Permission::create($permission);
+            $administrator->givePermissionTo($izin);
         }
+
     }
 }
