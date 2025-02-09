@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PermissionSeeder extends Seeder
 {
@@ -17,39 +18,50 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $administrator = Role::create([
-            "name" => "administrator",
-            "guard_name" => "web",
-        ]);
-
-        $admin = Role::create([
-            "name" => "admin",
-            "guard_name" => "web",
-        ]);
-
-        $keuangan = Role::create([
-            "name" => "keuangan",
-            "guard_name" => "web",
+            "name" => "superadmin",
+            "guard_name" => "api",
         ]);
 
         $this->permissions = [
-            ['name' => 'tambah asatidz', 'guard_name' => 'web'],
-            ['name' => 'ubah asatidz', 'guard_name' => 'web'],
-            ['name' => 'hapus asatidz', 'guard_name' => 'web'],
-            ['name' => 'tambah asrama', 'guard_name' => 'web'],
-            ['name' => 'ubah asrama', 'guard_name' => 'web'],
-            ['name' => 'hapus asrama', 'guard_name' => 'web'],
-            ['name' => 'tambah santri', 'guard_name' => 'web'],
-            ['name' => 'ubah santri', 'guard_name' => 'web'],
-            ['name' => 'hapus santri', 'guard_name' => 'web'],
-            ['name' => 'tambah pendidikan', 'guard_name' => 'web'],
-            ['name' => 'ubah pendidikan', 'guard_name' => 'web'],
-            ['name' => 'hapus pendidikan', 'guard_name' => 'web'],
+            ['name' => 'tambah asatidz', 'guard_name' => 'api'],
+            ['name' => 'ubah asatidz', 'guard_name' => 'api'],
+            ['name' => 'hapus asatidz', 'guard_name' => 'api'],
+            ['name' => 'tambah asrama', 'guard_name' => 'api'],
+            ['name' => 'ubah asrama', 'guard_name' => 'api'],
+            ['name' => 'hapus asrama', 'guard_name' => 'api'],
+            ['name' => 'tambah santri', 'guard_name' => 'api'],
+            ['name' => 'ubah santri', 'guard_name' => 'api'],
+            ['name' => 'hapus santri', 'guard_name' => 'api'],
+            ['name' => 'tambah pendidikan', 'guard_name' => 'api'],
+            ['name' => 'ubah pendidikan', 'guard_name' => 'api'],
+            ['name' => 'hapus pendidikan', 'guard_name' => 'api'],
         ];
 
         foreach ($this->permissions as $permission) {
             $izin = Permission::create($permission);
             $administrator->givePermissionTo($izin);
         }
+
+        $this->roles = [
+            ['name' => 'administrasi', 'guard_name' => 'api'],
+            ['name' => 'kasir', 'guard_name' => 'api'],
+            ['name' => 'wali kelas', 'guard_name' => 'api'],
+            ['name' => 'kepala asrama', 'guard_name' => 'api'],
+            ['name' => 'keamanan asrama', 'guard_name' => 'api'],
+            ['name' => 'keamanan pesantren', 'guard_name' => 'api'],
+        ];
+
+        foreach ($this->roles as $value) {
+            Role::create($value);
+        }
+
+        $sysadmin = User::where('name', 'erfaruq')->first();
+
+        $sysadmin->assignRole('superadmin');
+
+        $admin = User::where('name', 'rosi')->first();
+
+        $admin->assignRole('administrasi');
 
     }
 }

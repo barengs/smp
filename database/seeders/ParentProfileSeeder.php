@@ -20,15 +20,12 @@ class ParentProfileSeeder extends Seeder
         $header = ['kk', 'nik', 'name', 'address'];
         $data = $Csv->csv_to_array($file, $header);
         $data = array_map(function ($arr) use ($now) {
-            $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
-            unset($arr['lat'], $arr['long']);
-
-            return $arr + ['created_at' => $now, 'updated_at' => $now];
+            return ['created_at' => $now, 'updated_at' => $now];
         }, $data);
 
         $collection = collect($data);
         foreach ($collection->chunk(50) as $chunk) {
-            DB::table(config('laravolt.indonesia.table_prefix') . 'cities')->insertOrIgnore($chunk->toArray());
+            DB::table('parent_profiles')->insertOrIgnore($chunk->toArray());
         }
     }
 }

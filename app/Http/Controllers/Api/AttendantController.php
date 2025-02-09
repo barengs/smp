@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Models\Attendant;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ApiResource;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class AttendantController extends Controller
@@ -18,7 +19,14 @@ class AttendantController extends Controller
     {
         $data = Attendant::with('user')->latest()->get();
 
-        return new ApiResource(true, 'List data karyawan', $data);
+        // $att = DB::table('attendants as a')
+        //     ->join('users as u', 'u.id', '=', 'a.user_id')
+        //     ->join('user_roles as ur', 'ur.user_id', '=', 'u.id')
+        //     ->get();
+
+        $user = User::whereHas('attendant')->with('attendant')->with('roles')->get();
+
+        return new ApiResource(true, 'List data karyawan', $user);
     }
 
     /**

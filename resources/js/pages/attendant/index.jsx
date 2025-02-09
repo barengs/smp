@@ -24,37 +24,53 @@ import {useGetAttendantsQuery, useCreateAttendantMutation} from "@/store/api/att
 const columnHelper = createColumnHelper();
 
 const columns = [
-  columnHelper.accessor('code', {
+  columnHelper.accessor('attendant.code', {
     header: "Kode Asatidz",
     id: 'code',
     cell: item => item.getValue(),
   }),
   columnHelper.accessor('fullName', {
     header: "Nama Lengkap",
-    cell: ({row}) => {return `${row.original.first_name} ${row.original.last_name}`;}
+    cell: ({row}) => {return `${row.original.attendant.first_name} ${row.original.attendant.last_name}`;}
   }),
-  columnHelper.accessor('gender', {
+  columnHelper.accessor('attendant.gender', {
     header: "Jenis Kelamin",
     id: 'gender',
     cell: cell => cell.getValue() === 'l' ? 'Laki-Laki' : 'Perempuan',
+  }),
+  columnHelper.accessor('tugas', {
+    header: "Tugas",
+    cell: ({row}) => {
+      return (
+        row.original.roles.map((item, i) => {
+          return (
+            <span className="block w-full" key={i}>
+              <span className='inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500 bg-success-500 '>
+                {item.name? item.name : ''}
+              </span>
+            </span>
+          );
+        })
+      );
+    }
   }),
   columnHelper.accessor('action', {
     header: 'Aksi',
     cell: () => {
       return (
         <div className="flex space-x-3 rtl:space-x-reverse">
-          <Tooltip content="View" placement="top" arrow animation="shift-away">
+          <Tooltip content="Lihat" placement="top" arrow animation="shift-away">
             <button className="action-btn" type="button">
               <Icon icon="heroicons:eye" />
             </button>
           </Tooltip>
-          <Tooltip content="Edit" placement="top" arrow animation="shift-away">
+          <Tooltip content="Ubah" placement="top" arrow animation="shift-away">
             <button className="action-btn" type="button">
               <Icon icon="heroicons:pencil-square" />
             </button>
           </Tooltip>
           <Tooltip
-            content="Delete"
+            content="Hapus"
             placement="top"
             arrow
             animation="shift-away"
@@ -71,10 +87,10 @@ const columns = [
 ];
 
 const Attendant = () => {
-  const [newData, setNewData] = useState({first_name: '', last_name: '', name: '', password: '', email: '', gender: ''});
+  // const [newData, setNewData] = useState({first_name: '', last_name: '', name: '', password: '', email: '', gender: ''});
   const {data, isLoading, refetch} = useGetAttendantsQuery();
-  const [createAttendant, {isLoading: isCreating, error: createError}] = useCreateAttendantMutation();
-
+  // const [createAttendant, {isLoading: isCreating, error: createError}] = useCreateAttendantMutation();
+  // console.log(data);
   const [globalFilter, setGlobalFilter] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
@@ -103,10 +119,12 @@ const Attendant = () => {
     return index % 2 ? 'bg-gray-100' : '';
   };
   // fungsi untuk menyimpan data
-  const handleNewData = async () => {
-    await createAttendant(newData);
-    refetch();
-  };
+  // const handleNewData = async () => {
+  //   await createAttendant(newData);
+  //   refetch();
+  // };
+
+  // console.log(table.getRowModel().rows);
 
   return (
     <div className='space-y-5'>

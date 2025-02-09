@@ -3,7 +3,7 @@ import { apiSlice } from "../apiSlice";
 const roleApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getRoles: builder.query({
-      query: () => 'api/role'
+      query: () => 'role'
     }),
     createRole: builder.mutation({
       query: (payload) => ({
