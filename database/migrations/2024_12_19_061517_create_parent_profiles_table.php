@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nik')->unique();
             $table->string('first_name');
             $table->string('last_name')->nullable();
-            $table->enum('gender', ['L','P'])->default('L');
+            $table->enum('gender', ['L', 'P'])->default('L');
             $table->string('card_address')->nullable();
             $table->string('domicile_address')->nullable();
             $table->foreignId('village_id')->constrained()->cascadeOnDelete();

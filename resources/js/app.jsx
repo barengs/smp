@@ -1,11 +1,12 @@
-import React, { lazy, Suspense} from "react";
-import { Routes, Route} from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
 // home pages  & dashboard
 //import Dashboard from "./pages/dashboard";
 const Dashboard = lazy(() => import("./pages/dashboard"));
 const Parent = lazy(() => import("./pages/parents"));
 const Student = lazy(() => import("./pages/students"));
+const StudentRegistration = lazy(() => import("./pages/students-registration"));
 const Province = lazy(() => import("./pages/zone/province"));
 const City = lazy(() => import("./pages/zone/city"));
 const District = lazy(() => import("./pages/zone/district"));
@@ -42,6 +43,7 @@ const App = () => {
           <Route exact path="dashboard" element={<Dashboard />} />
           <Route path="wali-santri" element={<Parent />} />
           <Route path="santri" element={<Student />} />
+          <Route path="santri-baru" element={<StudentRegistration />} />
           <Route path="propinsi" element={<Province />} />
           <Route path="kota" element={<City />} />
           <Route path="kecamatan" element={<District />} />
