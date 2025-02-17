@@ -63,7 +63,7 @@ const Navmenu = ({ menus }) => {
         });
       }
     });
-    document.title = `Dashcode  | ${locationName}`;
+    document.title = `SMP  | ${locationName}`;
 
     setActiveSubmenu(submenuIndex);
     setMultiMenu(multiMenuIndex);

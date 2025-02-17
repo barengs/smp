@@ -50,7 +50,7 @@ const LoginForm = () => {
 
       dispatch(setUser(data));
       navigate("/dashboard");
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(response.data.data));
       toast.success("Berhasil Masuk!!");
     } catch (error) {
       toast.error(error.message);
@@ -95,7 +95,7 @@ const LoginForm = () => {
 
       <Button
         type="submit"
-        text="Sign in"
+        text="Masuk"
         className="btn btn-dark block w-full text-center "
         isLoading={isLoading}
       />

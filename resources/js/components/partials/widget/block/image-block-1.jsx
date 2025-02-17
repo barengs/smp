@@ -2,6 +2,7 @@ import React from "react";
 
 import image1 from "@/assets/images/all-img/widget-bg-1.png";
 const ImageBlock1 = () => {
+  const user = localStorage.getItem('user');
   return (
     <div
       className="bg-no-repeat bg-cover bg-center p-4 rounded-[6px] relative"

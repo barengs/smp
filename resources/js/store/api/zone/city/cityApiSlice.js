@@ -1,15 +1,15 @@
 import { apiSlice } from "../../apiSlice";
 
 const cityApiSlice = apiSlice.injectEndpoints({
-    endpoints: (builder) => ({
-        getCities: builder.query({
-            query: () => "kota",
-        }),
-        getCity: builder.query({
-            query: (id) => `kota/${id}`
-        })
+  endpoints: (builder) => ({
+    getCities: builder.query({
+      query: () => "kota",
     }),
-    overrideExisting: false,
+    getCity: builder.query({
+      query: (id) => `kota/${id}`
+    })
+  }),
+  overrideExisting: false,
 
 });
 
