@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApiResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Laravolt\Indonesia\Models\Village;
 
 class VillageController extends Controller
@@ -14,8 +15,20 @@ class VillageController extends Controller
      */
     public function index()
     {
-        $data = Village::with('district')->latest()->get();
-        return new ApiResource(true, 'data desa', $data);
+        // $data = Village::with('district')->latest()->get();
+        try {
+            $data = Village::with('district')->latest()->get();
+            return new ApiResource(true, 'Data desa', $data);
+        } catch (\Throwable $th) {
+            Log::error('Error fetching villages: ' . $th->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data desa',
+                'error' => $th->getMessage(),
+                'trace' => $th->getTrace(),
+            ], 500);
+        }
     }
 
     /**

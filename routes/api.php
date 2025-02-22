@@ -36,6 +36,11 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::apiResource('karyawan', AttendantController::class);
 Route::apiResource('orang-tua', ParentProfileController::class);
 Route::apiResource('student-registration', StudentRegistrationController::class);
+Route::get('student-registration/search-kk/{keyword}', [StudentRegistrationController::class, 'searchKK']);
+Route::post('student-registration/register-with-parent', [StudentRegistrationController::class, 'storeWithParent']);
+Route::post('student-registration/register-without-parent', [StudentRegistrationController::class, 'storeWithoutParent']);
+
+
 Route::apiResource('formal-education', FormalEducationController::class);
 Route::apiResource('class-level', ClassLevelController::class);
 Route::apiResource('student-formal-class-level', StudentFormalClassLevelController::class);

@@ -15,7 +15,7 @@ import Icon from "@/components/ui/Icon";
 // import Button from "@/components/ui/Button";
 import GlobalFilter from '@/components/partials/filter/GlobalFilter';
 
-import {useGetVillagesQuery} from "@/store/api/zone/village/villageApiSlice";
+import { useGetVillagesQuery } from "@/store/api/zone/village/villageApiSlice";
 import Placeholder from '../../../components/Placeholder';
 
 const columnHelper = createColumnHelper();
@@ -50,7 +50,7 @@ const columns = [
 
 const Village = () => {
   // ambil data dengan redux
-  const {data, error, isLoading} = useGetVillagesQuery();
+  const { data, error, isLoading } = useGetVillagesQuery();
 
   if (error) {
     console.log(error);
@@ -58,7 +58,7 @@ const Village = () => {
 
   const [globalFilter, setGlobalFilter] = useState([]);
   const [sorting, setSorting] = useState([]);
-  const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
   const table = useReactTable({
     data: !isLoading ? data.data : [],
@@ -143,7 +143,7 @@ const Village = () => {
                           ))}
                         </tr>
                       ))
-                          
+
                     )
                   }
                 </tbody>
@@ -158,7 +158,7 @@ const Village = () => {
             <select id='' name='page'
               className='border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2'
               value={table.getState().pagination.pageSize}
-              onChange={(e) => {table.setPageSize(Number(e.target.value));}}
+              onChange={(e) => { table.setPageSize(Number(e.target.value)); }}
             >
               {[5, 10, 15, 20, 30, 50, 100, 200].map((pageSize) => (
                 <option value={pageSize} key={pageSize}>

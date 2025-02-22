@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentParentRegistrationPost;
 use App\Http\Requests\StudentRegistrationPost;
+use App\Http\Requests\StudentWithoutParentRegistrationPost;
 use App\Http\Resources\ApiResource;
+use App\Models\ParentProfile;
+use App\Models\Phone;
 use App\Models\StudentRegistration;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Drivers\Gd\Encoders\WebpEncoder;
@@ -24,6 +29,73 @@ class StudentRegistrationController extends Controller
         return new ApiResource(true, 'list data siswa', $data);
     }
 
+    public function searchKK(string $keyword)
+    {
+        $data = ParentProfile::where('kk', $keyword)->first();
+        return new ApiResource(true, 'data orang tua', $data);
+    }
+
+
+    public function storeWithParent(StudentParentRegistrationPost $request)
+    {
+        $data = $request->validated();
+
+        $newUser = User::create([
+            'name' => $data['nama_depan_ortu'],
+            'email' => $data['email'],
+            'password' => $data['no_kk'],
+        ]);
+
+        $phone = Phone::create([
+            'country_code' => '62',
+            'number' => '05141421' . rand(),
+        ]);
+
+        $parent = ParentProfile::create([
+            'user_id' => $newUser->id,
+            'parent_as' => $data['status_ortu'],
+            'nik' => $data['nik_parent'],
+            'kk' => $data['no_kk'],
+            'first_name' => $data['nama_depan_ortu'],
+            'last_name' => $data['nama_belakang_ortu'],
+            'gender' => $data['gender_ortu'],
+            'card_address' => $data['alamat_ktp_ortu'],
+            'domicile_address' => $data['alamat_domisili_ortu'],
+            'village_id' => 1,
+            'phone_id' => $phone->id,
+        ]);
+
+        $student = StudentRegistration::create([
+            'reg_no' => rand(),
+            'nik' => $data['nik_siswa'],
+            'first_name' => $data['nama_depan_siswa'],
+            'last_name' => $data['nama_belakang_siswa'],
+            'gender' => $data['gender_siswa'],
+            'parent_id' => $parent->id,
+            'address' => $data['alamat_siswa'],
+            'village_id' => 1,
+        ]);
+
+        return new ApiResource(true, 'Pendaftaran Siswa berhasil!', $student);
+    }
+
+    public function storeWithoutParent(StudentWithoutParentRegistrationPost $request)
+    {
+        $data = $request->validated();
+
+        $student = StudentRegistration::create([
+            'reg_no' => rand(),
+            'nik' => $data['nik_siswa'],
+            'first_name' => $data['nama_depan_siswa'],
+            'last_name' => $data['nama_belakang_siswa'],
+            'gender' => $data['gender_siswa'],
+            'parent_id' => $data['parent_id'],
+            'address' => $data['alamat_siswa'],
+            'village_id' => 1,
+        ]);
+
+        return new ApiResource(true, 'Pendaftaran Siswa berhasil!', $student);
+    }
 
     /**
      * Store a newly created resource in storage.

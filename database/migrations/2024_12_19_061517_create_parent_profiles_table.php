@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parent_profiles', function (Blueprint $table) {
-            $table->id('kk');
+            $table->id('id');
             $table->unsignedBigInteger('main_id')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('parent_as', ['ayah', 'ibu'])->default('ayah');
             $table->string('nik')->unique();
+            $table->bigInteger('kk')->unique();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->enum('gender', ['L', 'P'])->default('L');
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->text('photo')->nullable();
             $table->timestamps();
 
-            $table->foreign('main_id')->references('kk')->on('parent_profiles')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('main_id')->references('id')->on('parent_profiles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
