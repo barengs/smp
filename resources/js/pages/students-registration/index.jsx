@@ -99,6 +99,10 @@ const StudentRegistration = () => {
             try {
                 const response = await registerWithParent(formDataWithParent).unwrap();
                 console.log("Registration Success:", response);
+                setFormDataWithParent(initialFormData);
+                setKK(null)
+                setSearchedKK(true);
+                searchValue("");
             } catch (err) {
                 console.error("Registration Failed:", err.error);
             }
@@ -107,6 +111,10 @@ const StudentRegistration = () => {
             try {
                 const response = await registerWithoutParent(formDataWithParent).unwrap();
                 console.log("Registration Success:", response);
+                setFormDataWithParent(initialFormData);
+                setKK(null)
+                setSearchedKK(true);
+                searchValue("");
             } catch (err) {
                 console.error("Registration Failed:", err.error);
             }
@@ -200,12 +208,6 @@ const StudentRegistration = () => {
                                             {errors.nama_depan_ortu && <p className="text-red-500 text-xs">{errors.nama_depan_ortu}</p>}
                                             <TextInput className="flex-1" id="nama_belakang" type="text" placeholder="Nama Belakang" value={formDataWithParent.nama_belakang_ortu} onChange={handleFormChange} readOnly />
                                         </div>
-
-                                        <div className="mb-2 block">
-                                            <Label htmlFor="base" value="Email*" />
-                                        </div>
-                                        <TextInput id="email" name="email" type="email" placeholder="Email" className="mb-4" required value={formDataWithParent.email} onChange={handleFormChange} readOnly />
-                                        {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
 
                                         <div className="mb-2 block">
                                             <Label htmlFor="base" value="Status Orang tua*" />
