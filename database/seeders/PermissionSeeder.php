@@ -55,11 +55,11 @@ class PermissionSeeder extends Seeder
             Role::create($value);
         }
 
-        $sysadmin = User::where('name', 'erfaruq')->first();
+        $sysadmin = User::where('username', 'erfaruq')->first();
 
         $sysadmin->assignRole('superadmin');
 
-        $admin = User::where('name', 'rosi')->first();
+        $admin = User::where('username', 'rosi')->first();
 
         $admin->assignRole('administrasi');
 

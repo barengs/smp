@@ -31,13 +31,14 @@ const LoginForm = () => {
     //
     mode: "all",
   });
+
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
 
       if (response.error) {
-        throw new Error(response.error.message);
+        throw new Error(' Gagal masuk, periksa email dan kata sandi');
       }
 
       if (response.data.error) {

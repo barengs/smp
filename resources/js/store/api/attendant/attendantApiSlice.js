@@ -6,10 +6,10 @@ const attendantApi = apiSlice.injectEndpoints({
       query: () => 'attendant'
     }),
     createAttendant: builder.mutation({
-      query: (payload) => ({
+      query: (data) => ({
         url: 'attendant',
         method: 'POST',
-        body: payload
+        body: data
       })
     })
   })

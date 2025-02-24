@@ -54,9 +54,13 @@ class AttendantController extends Controller
         ]);
 
         if ($account) {
+            if ($request->role) {
+                $account->assignRole($request->role);
+            }
+            $lastData = Attendant::orderBy('id', 'desc')->first();
             $att = Attendant::create([
                 'user_id' => $account->id,
-                'code' => 123,
+                'code' => $this->generateCode($lastData->id),
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'gender' => $request->gender,
@@ -66,7 +70,11 @@ class AttendantController extends Controller
 
             if ($att) {
                 return new ApiResource(true, 'Data karyawan tersimpan', $att);
+            } else {
+                return new ApiResource(false, 'gagal membuat profil pengguna', '');
             }
+        } else {
+            return new ApiResource(false, 'gagal membuat akun pengguna', '');
         }
     }
 
@@ -94,5 +102,14 @@ class AttendantController extends Controller
     public function destroy(Attendant $attendant)
     {
         //
+    }
+
+    public function generateCode($id)
+    {
+        if ($id < 10) {
+            return 'AS0' . $id + 1;
+        } else {
+            return 'AS' . $id + 1;
+        }
     }
 }

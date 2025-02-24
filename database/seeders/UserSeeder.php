@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
     {
         $this->password = Hash::make('password');
         $this->data = [
-            ["name" => "superadmin", "email" => "superadmin@mail.com", "password" => $this->password],
-            ["name" => "erfaruq", "email" => "erfaruq@mail.com", "password" => $this->password],
-            ["name" => "rumhul", "email" => "rumhul@mail.com", "password" => $this->password],
-            ["name" => "rosi", "email" => "rosi@mail.com", "password" => $this->password],
-            ["name" => "bahul", "email" => "bahul@mail.com", "password" => $this->password],
+            ["username" => "superadmin", "email" => "superadmin@mail.com", "password" => $this->password],
+            ["username" => "erfaruq", "email" => "erfaruq@mail.com", "password" => $this->password],
+            ["username" => "rumhul", "email" => "rumhul@mail.com", "password" => $this->password],
+            ["username" => "rosi", "email" => "rosi@mail.com", "password" => $this->password],
+            ["username" => "bahul", "email" => "bahul@mail.com", "password" => $this->password],
         ];
 
         foreach ($this->data as $value) {

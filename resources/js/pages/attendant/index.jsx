@@ -13,13 +13,11 @@ import {
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Tooltip from "@/components/ui/Tooltip";
-import Modal from "@/components/ui/Modal";
-import Button from "@/components/ui/Button";
 import AddData from './AddData';
 
 import GlobalFilter from '@/components/partials/filter/GlobalFilter';
 
-import {useGetAttendantsQuery, useCreateAttendantMutation} from "@/store/api/attendant/attendantApiSlice";
+import {useGetAttendantsQuery} from "@/store/api/attendant/attendantApiSlice";
 
 const columnHelper = createColumnHelper();
 
@@ -88,7 +86,7 @@ const columns = [
 
 const Attendant = () => {
   // const [newData, setNewData] = useState({first_name: '', last_name: '', name: '', password: '', email: '', gender: ''});
-  const {data, isLoading, refetch} = useGetAttendantsQuery();
+  const {data, isLoading} = useGetAttendantsQuery();
   // const [createAttendant, {isLoading: isCreating, error: createError}] = useCreateAttendantMutation();
   // console.log(data);
   const [globalFilter, setGlobalFilter] = useState([]);
@@ -136,22 +134,8 @@ const Attendant = () => {
             <button type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-md text-sm px-3 py-2 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2 ml-2">
               <Icon icon='heroicons:inbox-arrow-down' width="20" className="mr-2" /> Export Dokumen
             </button>
-            <Modal
-              label="Tambah Asatidz"
-              title="Asatidz Baru"
-              labelClass="btn-outline-dark"
-              uncontrol
-              className="max-w-5xl"
-              icon="heroicons:document-plus"
-              footerContent={
-                <Button
-                  text="Simpan"
-                  className="btn-dark px-3 py-2"
-                />
-              }
-            >
-              <AddData />
-            </Modal>
+            
+            <AddData />
           </div>
         </div>
 		
