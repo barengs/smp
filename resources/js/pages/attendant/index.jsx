@@ -43,7 +43,7 @@ const columns = [
         row.original.roles.map((item, i) => {
           return (
             <span className="block w-full" key={i}>
-              <span className='inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500 bg-success-500 '>
+              <span className='float-end px-3 my-1 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500 bg-success-500 '>
                 {item.name? item.name : ''}
               </span>
             </span>
@@ -177,7 +177,7 @@ const Attendant = () => {
                   <tbody className="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
                     {
                       table.getRowModel().rows.map((row, i) => (
-                        <tr key={row.id} className={isOdd(i)}>
+                        <tr key={row.id} className={`${isOdd(i)}`}>
                           {row.getVisibleCells().map(cell => (
                             <td key={cell.id} className='table-td py-2'>
                               {flexRender(cell.column.columnDef.cell, cell.getContext())}

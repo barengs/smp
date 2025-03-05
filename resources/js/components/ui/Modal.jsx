@@ -24,6 +24,7 @@ const Modal = ({
 
   const closeModal = () => {
     setShowModal(false);
+    console.log('ok');
   };
 
   const openModal = () => {

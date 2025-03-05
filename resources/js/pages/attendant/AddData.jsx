@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import InputGroup from "@/components/ui/InputGroup";
+import Fileinput from "@/components/ui/Fileinput";
 import Icon from "@/components/ui/Icon";
 import Radio from '@/components/ui/Radio';
 import Select from "react-select";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -23,16 +24,19 @@ const FormValidation = yup.object({
     .min(6, 'Minimal karakter adalah 6')
     .max(15, 'Maksimal adalah 15')
     .required(' kata kunci harus di isi!'),
+  password_confirmation: yup.string('Ulangi kata sandi').oneOf([yup.ref('password')], 'kata sandi tidak sesuai'),
   email: yup.string().required(' Email harus di isi!'),
 }).required();
 
 const AddData = () => {
-
+  const ref = useRef();
   const {data: roleData, isLoading} = useGetRolesQuery();
 
   const [createAttendant, {isLoading: loading, isError, error, isSuccess}] = useCreateAttendantMutation();
 
   const dispatch = useDispatch();
+
+  const [modal, setModal] = useState(true);
 
   const {
     register,
@@ -52,6 +56,7 @@ const AddData = () => {
     address: '',
     gender: '',
     role: '',
+    photo: null,
   });
 
   const handleGender = (e) => {
@@ -68,26 +73,11 @@ const AddData = () => {
       };
     });
   };
-  // ketika button submit di klik, fungsi ini di jalankan
-  const onSubmit = async () => {
-    try {
-      // fungsi ini dari redux yang di buat di folder store
-      const response = createAttendant(attData);
-
-      if (response.error){
-        throw new Error(response.error);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-    console.log(attData);
-    dispatch();
-  };
-
+  
   const handleInput = (event) => {
     let value = event.target.value;
     let name = event.target.name;
-
+    
     setAttData((preValue) => {
       return {
         ...preValue,
@@ -95,22 +85,59 @@ const AddData = () => {
       };
     });
   };
+  
+  const handleFileInput = (e) => {
+    const files = e.target.files[0];
+    const name = e.target.name;
+    setAttData((prevValue) => {
+      return {
+        ...prevValue,
+        [name]: files
+      };
+    });
+  };
+  
+  // ketika button submit di klik, fungsi ini di jalankan
+  const onSubmit = async () => {
+    ref.current?.closeModal();
+    // console.log(modal);
+    // try {
+    //   // fungsi ini dari redux yang di buat di folder store
+    //   const response = await createAttendant(attData);
+    //   console.log(response);
+    //   const option = {
+    //     ariaLabel: "test",
+    //     position: "top-center",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: false,
+    //     pauseOnHover: false,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "colored",
+    //   };
+    //   if (response.error.status == 422){
+    //     const errData = response.error.data;
+    //     if (errData.email) {
+    //       toast.error(`Terjadi kesalahan, email sudah digunakan`, option);
+    //     } else if (errData.phone) {
+    //       toast.error(`Terjadi kesalahan, nomor telepon sudah digunakan`, option);
+    //     }
+    //     setModal(!modal);
+    //   }
 
-  const handlePasswordConfirm = (e) => {
-    let val = e.target.value;
-    let name = e.target.name;
-    let old = attData.password;
-
-    if (val !== old ){
-      throw new Error('Konfirmasi password tidak sesuai');
-    } else {
-      setAttData((prev) => {
-        return {
-          ...prev,
-          [name]: val
-        };
-      });
-    }
+    //   if (response.data.success == true) {
+    //     toast.success('Data berhasil di tambahkan', option);
+    //     setModal(!modal);
+    //   }
+    // } catch (error) {
+    //   if (error.status !== undefined) {
+    //     toast.error('Terjadi kesalahan pada :' + error.message);
+    //     console.log(error);
+    //   }
+    // }
+    // console.log(attData);
+    // dispatch();
   };
 
   const genders = [
@@ -126,20 +153,24 @@ const AddData = () => {
 
   return (
     <Modal
+      activeModal={modal}
       label="Tambah Asatidz"
       title="Asatidz Baru"
       labelClass="btn-outline-dark"
       uncontrol
       className="h-full w-full"
       icon="heroicons:document-plus"
+      ref={ref}
       footerContent={
         <Button
           text="Simpan"
           className="btn-dark px-3 py-2"
           onClick={handleSubmit(onSubmit)}
+          isLoading={loading}
         />
       }
     >
+      <ToastContainer />
       <div className="grid xl:grid-cols-2 grid-cols-1 gap-5">
         <div className="space-y-4">
           <InputGroup
@@ -204,7 +235,7 @@ const AddData = () => {
             merged
             register={register}
             error={errors.password_confirmation}
-            onChange={handlePasswordConfirm}
+            onChange={handleInput}
           />
         </div>
         <div className="space-y-4">
@@ -272,6 +303,14 @@ const AddData = () => {
               onChange={handleRole}
             />
           </div>
+        </div>
+        <div className="space-y-4">
+          <Fileinput
+            name="photo"
+            selectedFiles={attData.photo}
+            onChange={handleFileInput}
+            preview
+          />
         </div>
       </div>
     </Modal>

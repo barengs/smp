@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Models\Attendant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ApiResource;
@@ -106,10 +107,13 @@ class AttendantController extends Controller
 
     public function generateCode($id)
     {
+        $dt = Carbon::now();
+        $th = $dt->year;
+        $bl = $dt->month;
         if ($id < 10) {
-            return 'AS0' . $id + 1;
+            return 'AS0' . $id + 1 . $th . $bl;
         } else {
-            return 'AS' . $id + 1;
+            return 'AS' . $id + 1 . $th . $bl;
         }
     }
 }
