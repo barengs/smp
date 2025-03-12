@@ -4,13 +4,13 @@ import moment from "moment-timezone";
 
 const CardWelcome = () => {
   const user = JSON.parse(localStorage.getItem('user'));
-
+  console.log(user.username);
   const [days, setDays] = useState('');
 
   const getDays = () => {
     const [day, hour, am_pm] = moment().tz('Asia/Jakarta').format("dddd,h,A").split(",");
     let dateOut;
-    console.log(hour);
+    // console.log(hour);
     if (am_pm == 'AM'){
       dateOut = `Pagi`;
     } else {
@@ -38,7 +38,7 @@ const CardWelcome = () => {
       <div>
         <h4 className="text-xl font-medium text-white mb-2">
           <span className="block font-normal">Selamat {days},</span>
-          <span className="block">Ust. {(user.name).toUpperCase()}</span>
+          <span className="block">Ust. {(user.username).toUpperCase()}</span>
         </h4>
         <p className="text-sm text-white font-normal">Selamat datang di Manjemen Pesantren</p>
       </div>

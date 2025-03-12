@@ -62,11 +62,17 @@ const Create = () => {
       // cek jika ada error
       if (response.error.status === 422) {
         const err = response.error.data;
+        if (err.first_name) {
+          toast.error('nama depan harus di isi');
+        }
         if (err.email) {
-          toast.error('email sudah terdaftar');
+          toast.error('email harus di isi');
         }
         if (err.phone) {
-          toast.error(response.error);
+          toast.error('nomor telepon harus di isi');
+        }
+        if (err.address) {
+          toast.error('alamat harus di isi');
         }
       }
       // cek jika data berhasil di tambahkan
@@ -94,7 +100,7 @@ const Create = () => {
         btnLabelCancel="Batal"
         onSubmit={handleSubmit}
       >
-        {/* <ToastContainer /> */}
+        <ToastContainer />
         <div className="grid md:grid-cols-2 md:gap-6">
           <TextInputFloat
             name={'first_name'}
@@ -164,9 +170,9 @@ const Create = () => {
         </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <TextInputFloat
-            name={'address'}
-            label={'Alamat'}
-            id={'address'}
+            name={'phone'}
+            label={'No Telepon'}
+            id={'phone'}
             type={'text'}
             onChange={handleInput}
           />
