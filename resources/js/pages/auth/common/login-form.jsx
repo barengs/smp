@@ -97,7 +97,7 @@ const LoginForm = () => {
       <Button
         type="submit"
         text="Masuk"
-        className="btn btn-dark block w-full text-center "
+        className="btn btn-primary block w-full text-center "
         isLoading={isLoading}
       />
     </form>

@@ -41,7 +41,10 @@ const Profile = () => {
     // Clear user data from local storage
     localStorage.removeItem("user");
     dispatch(logOut());
-    navigate('/');
+    if (localStorage.getItem('user') === null){
+      navigate('/');
+    }
+
   };
 
   const ProfileMenu = [

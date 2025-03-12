@@ -21,7 +21,7 @@ const login = () => {
             <Link to="/">
               <img src={isDark ? LogoWhite : Logo} alt="" className="mb-10" />
             </Link>
-            <h4 className="">
+            <h4 className="text-center">
             اَلسَّلَامُ عَلَيْكُمْ
               <br />
               <span className="text-slate-800 dark:text-slate-400 font-bold">
@@ -56,14 +56,14 @@ const login = () => {
                 </div>
               </div>
               <LoginForm />
-              <div className="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
+              {/* <div className="relative border-b-[#9AA2AF] border-opacity-[16%] border-b pt-6">
                 <div className="absolute inline-block bg-white dark:bg-slate-800 dark:text-slate-400 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-slate-500 font-normal">
                   Atau menggunakan cara lainnya.
                 </div>
               </div>
               <div className="max-w-[242px] mx-auto mt-8 w-full">
                 <Social />
-              </div>
+              </div> */}
               <div className="md:max-w-[345px] mx-auto font-normal text-slate-500 dark:text-slate-400 mt-12 uppercase text-sm">
                 Belum memiliki akun?{" "}
                 <Link
