@@ -29,7 +29,7 @@ const FormValidation = yup.object({
 }).required();
 
 const AddData = () => {
-  const ref = useRef();
+  const childRef = useRef();
   const {data: roleData, isLoading} = useGetRolesQuery();
 
   const [createAttendant, {isLoading: loading, isError, error, isSuccess}] = useCreateAttendantMutation();
@@ -99,7 +99,8 @@ const AddData = () => {
   
   // ketika button submit di klik, fungsi ini di jalankan
   const onSubmit = async () => {
-    ref.current?.closeModal();
+    setModal(false);
+    console.log('ok');
     // console.log(modal);
     // try {
     //   // fungsi ini dari redux yang di buat di folder store
@@ -153,14 +154,14 @@ const AddData = () => {
 
   return (
     <Modal
-      activeModal={modal}
+      onClose={modal}
       label="Tambah Asatidz"
       title="Asatidz Baru"
       labelClass="btn-outline-dark"
       uncontrol
       className="h-full w-full"
       icon="heroicons:document-plus"
-      ref={ref}
+      ref={childRef}
       footerContent={
         <Button
           text="Simpan"

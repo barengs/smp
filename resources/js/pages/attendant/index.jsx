@@ -18,6 +18,8 @@ import AddData from './AddData';
 import GlobalFilter from '@/components/partials/filter/GlobalFilter';
 
 import {useGetAttendantsQuery} from "@/store/api/attendant/attendantApiSlice";
+import Create from './Create';
+import ModalForm from '../../components/partials/modal/modal-form';
 
 const columnHelper = createColumnHelper();
 
@@ -134,8 +136,9 @@ const Attendant = () => {
             <button type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-md text-sm px-3 py-2 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2 ml-2">
               <Icon icon='heroicons:inbox-arrow-down' width="20" className="mr-2" /> Export Dokumen
             </button>
-            
-            <AddData />
+            {/* <AddData /> */}
+            <Create  />
+            {/* <ModalForm size={'7xl'} lableButton={'Tambah Data'} footer={true} lableCancel={'Batal'} lableAccept={'Simpan'} /> */}
           </div>
         </div>
 		
