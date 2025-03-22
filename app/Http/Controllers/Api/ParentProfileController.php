@@ -21,7 +21,7 @@ class ParentProfileController extends Controller
      */
     public function index()
     {
-        $data = ParentProfile::with('main')->with('phone')->with('village')->with('student')->latest()->paginate();
+        $data = ParentProfile::with('main')->with('phone')->with('village')->with('student')->latest()->get();
 
         return new ApiResource(true, 'list data orang tua', $data);
     }

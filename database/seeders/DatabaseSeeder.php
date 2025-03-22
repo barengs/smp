@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             NonFormalEducationSeeder::class,
             EducationTypeSeeder::class,
             AttendantSeeder::class,
+            ParentProfileSeeder::class,
+            StudentSeeder::class,
         ]);
     }
 }

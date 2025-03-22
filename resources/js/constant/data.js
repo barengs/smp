@@ -23,6 +23,10 @@ export const menuItems = [
         childlink: "/santri",
       },
       {
+        childtitle: "Santri Tugas",
+        childlink: "/santri",
+      },
+      {
         childtitle: "Data Wali",
         childlink: "/wali-santri",
       }

@@ -9,13 +9,15 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import {useGetStudentsQuery} from "@/store/api/student/studentApiSlice";
+
 import Card from "@/components/ui/Card";
 import GlobalFilter from './GlobalFilter';
 import Icon from "@/components/ui/Icon";
 import Modal from "@/components/ui/Modal";
 import Tooltip from "@/components/ui/Tooltip";
 
-import { studentData } from '../../constant/student-data';
+// import { studentData } from '../../constant/student-data';
 import AddNewStudent from './AddNew';
 import Button from "@/components/ui/Button";
 
@@ -23,14 +25,14 @@ const columnHelper = createColumnHelper();
 
 
 const columns = [
-  columnHelper.accessor(row => row.firstName, {
-    header: 'First Name',
-    id: 'firstName',
+  columnHelper.accessor(row => row.nis, {
+    header: 'NIS',
+    id: 'nis',
     cell: info => info.getValue(),
   }),
-  columnHelper.accessor(row => row.lastName, {
-    id: 'lastName',
-    cell: info => info.getValue(),
+  columnHelper.accessor('full_name', {
+    header: 'Nama Lengkap',
+    cell: ({row}) => {return `${row.original.first_name} ${row.original.last_name}`;}
   }),
   columnHelper.accessor(row => row.nik, {
     id: 'nik',
@@ -40,9 +42,14 @@ const columns = [
     id: 'address',
     cell: info => info.getValue(),
   }),
+  columnHelper.accessor(row => row.district, {
+    header: 'Kecamatan',
+    id: 'district',
+    cell: info => info.getValue(),
+  }),
   columnHelper.accessor(row => row.gender, {
     id: 'gender',
-    cell: info => info.getValue(),
+    cell: info => info.getValue() == 'L' ? 'Laki-Laki' : 'Perempuan',
   }),
   columnHelper.accessor('action', {
     header: 'Action',
@@ -77,7 +84,8 @@ const columns = [
 ];
 
 const Student = () => {
-  const [data] = useState(() => [...studentData]);
+  // const [data] = useState(() => [...studentData]);
+  const {data, isLoading} = useGetStudentsQuery();
   // const rerender = useReducer(() => ({}), {})[1];
   const [globalFilter, setGlobalFilter] = useState([]);
 
@@ -86,7 +94,7 @@ const Student = () => {
   const [sorting, setSorting] = useState([]);
 
   const table = useReactTable({
-    data,
+    data: !isLoading ? data.data : [],
     columns,
     state: {
       sorting,

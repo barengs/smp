@@ -12,19 +12,25 @@ return new class extends Migration {
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('parent_id');
+            $table->string('parent_id');
             $table->string('nis')->unique();
+            $table->string('period')->nullable();
             $table->string('nik')->unique()->nullable();
+            $table->string('kk')->unique()->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->enum('gender', ['L', 'P'])->default('L');
             $table->string('address')->nullable();
             $table->string('born_in')->nullable();
-            $table->timestamp('born_at')->nullable();
-            $table->bigInteger('village_id');
+            $table->date('born_at')->nullable();
+            $table->string('last_education')->nullable();
+            $table->unsignedBigInteger('village_id')->nullable();
+            $table->string('village')->nullable();
             $table->string('district')->nullable();
             $table->string('postal_code')->nullable();
-            $table->bigInteger('education_type_id');
+            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('hostel_id')->nullable();
+            $table->unsignedBigInteger('education_type_id');
             $table->enum('status', ['Aktif', 'Tugas', 'Lulus', 'Dikeluarkan'])->default('Aktif')->nullable();
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('user_id');

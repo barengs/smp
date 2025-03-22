@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\HostelController;
 use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
@@ -55,3 +56,5 @@ Route::apiResource('hostel', HostelController::class);
 
 Route::apiResource('formal-education', FormalEducationController::class);
 Route::apiResource('nonformal-education', NonFormalEducationController::class);
+
+Route::apiResource('santri', StudentController::class);

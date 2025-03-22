@@ -49,6 +49,28 @@ const columns = [
 ];
 
 const Village = () => {
+  // test koneksi via redux
+  function measureQueryTime(queryFunction) {
+    return async function (...args) {
+      const startTime = performance.now(); // Start time
+      const result = await queryFunction(...args);
+      const endTime = performance.now(); // End time
+  
+      console.log(`Query executed in ${(endTime - startTime).toFixed(2)} ms`);
+      return result;
+    };
+  }
+
+  const fetchData = async () => {
+    const {data} = useGetVillagesQuery();
+    return (data);
+  };
+
+  const timedFetchData = measureQueryTime(fetchData);
+
+  timedFetchData().then(data => console.log(data));
+
+  
   // ambil data dengan redux
   const {data, error, isLoading} = useGetVillagesQuery();
 

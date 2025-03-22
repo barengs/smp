@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Attendant;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -36,10 +37,12 @@ class AuthController extends Controller
             // Get the authenticated user.
             $user = auth()->user();
 
+            $profile = Attendant::where('user_id', $user->id)->first();
+
             // (optional) Attach the role to the token.
             $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
 
-            return response()->json(['status' => true, 'message' => 'login berhasil!', 'data' => $user, 'token' => $token]);
+            return response()->json(['status' => true, 'message' => 'login berhasil!', 'data' => $user, 'profil' => $profile, 'token' => $token]);
         } catch (JWTException $e) {
             return response()->json(['error' => 'Could not create token'], 500);
         }

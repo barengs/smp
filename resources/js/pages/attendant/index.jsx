@@ -13,13 +13,11 @@ import {
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Tooltip from "@/components/ui/Tooltip";
-import AddData from './AddData';
 
 import GlobalFilter from '@/components/partials/filter/GlobalFilter';
 
 import {useGetAttendantsQuery} from "@/store/api/attendant/attendantApiSlice";
 import Create from './Create';
-import ModalForm from '../../components/partials/modal/modal-form';
 
 const columnHelper = createColumnHelper();
 
